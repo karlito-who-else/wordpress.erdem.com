@@ -124,3 +124,5 @@ if ( !defined("ABSPATH") )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . "wp-settings.php");
+
+ini_set('max_input_vars', 3000);
