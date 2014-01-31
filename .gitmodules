@@ -6,7 +6,7 @@
 	url = https://github.com/humanmade/backupwordpress.git
 [submodule "backwpup"]
 	path = config/public/wp-content/plugins/backwpup
-	url = https://github.com/https://github.com/inpsyde/backwpup.git
+	url = https://github.com/inpsyde/backwpup.git
 [submodule "jetpack"]
 	path = config/public/wp-content/plugins/jetpack
 	url = https://github.com/Automattic/jetpack.git
@@ -19,3 +19,24 @@
 [submodule "wp-migrate-db"]
 	path = config/public/wp-content/plugins/wp-migrate-db
 	url = https://github.com/bradt/wp-migrate-db.git
+[submodule "config/public/wp-content/plugins/advanced-custom-fields"]
+	path = config/public/wp-content/plugins/advanced-custom-fields
+	url = https://github.com/elliotcondon/acf.git
+[submodule "config/public/wp-content/plugins/backupwordpress"]
+	path = config/public/wp-content/plugins/backupwordpress
+	url = https://github.com/humanmade/backupwordpress.git
+[submodule "config/public/wp-content/plugins/jetpack"]
+	path = config/public/wp-content/plugins/jetpack
+	url = https://github.com/Automattic/jetpack.git
+[submodule "config/public/wp-content/plugins/regenerate-thumbnails"]
+	path = config/public/wp-content/plugins/regenerate-thumbnails
+	url = https://github.com/Viper007Bond/regenerate-thumbnails.git
+[submodule "config/public/wp-content/plugins/thermal-api"]
+	path = config/public/wp-content/plugins/thermal-api
+	url = https://github.com/voceconnect/thermal-api.git
+[submodule "config/public/wp-content/plugins/wp-migrate-db"]
+	path = config/public/wp-content/plugins/wp-migrate-db
+	url = https://github.com/bradt/wp-migrate-db.git
+[submodule "config/public/wp-content/plugins/backwpup"]
+	path = config/public/wp-content/plugins/backwpup
+	url = https://github.com/inpsyde/backwpup.git
