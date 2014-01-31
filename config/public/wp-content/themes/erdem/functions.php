@@ -223,10 +223,17 @@ function remove_admin_menu_items() {
 	$remove_menu_items = array(__('Posts'), ('Pages'), ('Dashboard'), ('jetpack'), ('Comments'), ('Feedback'), ('Profile'), ('Tools'), ('Settings'));
 	global $menu;
 	end ($menu);
-	while (prev($menu)){
-		$item = explode(' ',$menu[key($menu)][0]);
-		if(in_array($item[0] != NULL?$item[0]:"" , $remove_menu_items)){
-		unset($menu[key($menu)]);}
+
+	if( !current_user_can( 'manage_options' ) ) {
+		while (prev($menu)){
+			$item = explode(' ',$menu[key($menu)][0]);
+			if(in_array($item[0] != NULL?$item[0]:"" , $remove_menu_items)){
+			unset($menu[key($menu)]);}
+		}
+
+		if( class_exists( 'Jetpack' ) ) {
+			remove_menu_page( 'jetpack' );
+		}
 	}
 }
 add_action('admin_menu', 'remove_admin_menu_items');
