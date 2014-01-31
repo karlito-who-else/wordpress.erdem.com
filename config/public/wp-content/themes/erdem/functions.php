@@ -230,10 +230,13 @@ function remove_admin_menu_items() {
 			if(in_array($item[0] != NULL?$item[0]:"" , $remove_menu_items)){
 			unset($menu[key($menu)]);}
 		}
-
-		if( class_exists( 'Jetpack' ) ) {
-			remove_menu_page( 'jetpack' );
-		}
 	}
 }
 add_action('admin_menu', 'remove_admin_menu_items');
+
+function remove_jetpack_admin_menu_item() {
+	if( class_exists( 'Jetpack' ) && !current_user_can( 'manage_options' ) ) {
+		remove_menu_page( 'jetpack' );
+	}
+}
+add_action( 'admin_init', 'remove_jetpack_admin_menu_item' );
