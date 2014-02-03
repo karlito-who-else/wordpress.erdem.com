@@ -13,9 +13,6 @@
 [submodule "config/public/wp-content/plugins/regenerate-thumbnails"]
 	path = config/public/wp-content/plugins/regenerate-thumbnails
 	url = https://github.com/Viper007Bond/regenerate-thumbnails.git
-[submodule "config/public/wp-content/plugins/thermal-api"]
-	path = config/public/wp-content/plugins/thermal-api
-	url = https://github.com/voceconnect/thermal-api.git
 [submodule "config/public/wp-content/plugins/wp-migrate-db"]
 	path = config/public/wp-content/plugins/wp-migrate-db
 	url = https://github.com/bradt/wp-migrate-db.git
