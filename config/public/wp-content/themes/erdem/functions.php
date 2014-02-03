@@ -57,7 +57,7 @@ function create_post_type()
 			'labels' => array(
                                 
 				'name' => __( 'All Explore' ),
-				'singular_name' => __( 'explore' )
+				'singular_name' => __( 'Explore' )
 			),
 		'public' => true,
 		'has_archive' => true,
