@@ -126,3 +126,4 @@ if ( !defined("ABSPATH") )
 require_once(ABSPATH . "wp-settings.php");
 
 ini_set('max_input_vars', 3000);
+ini_set('upload_max_filesize', '200M');
