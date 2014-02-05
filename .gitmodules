@@ -13,6 +13,9 @@
 [submodule "config/public/wp-content/plugins/regenerate-thumbnails"]
 	path = config/public/wp-content/plugins/regenerate-thumbnails
 	url = https://github.com/Viper007Bond/regenerate-thumbnails.git
+[submodule "config/public/wp-content/plugins/wordpress-https"]
+	path = config/public/wp-content/plugins/wordpress-https
+	url = https://github.com/Mvied/wordpress-https.git
 [submodule "config/public/wp-content/plugins/wp-migrate-db"]
 	path = config/public/wp-content/plugins/wp-migrate-db
 	url = https://github.com/bradt/wp-migrate-db.git
