@@ -171,6 +171,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 		setmetaData($data, $post, 'collection_lookbook_featured');
 		setmetaData($data, $post, 'collection_backstage_featured');
 		setmetaData($data, $post, 'collection_video_featured');
+		setmetaData($data, $post, 'collection_video_poster');
 		
 		setmetaData($data, $post, 'collection_runway');
 		setmetaData($data, $post, 'collection_lookbook');
