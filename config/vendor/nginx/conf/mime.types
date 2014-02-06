@@ -41,6 +41,7 @@ types {
   video/mp4                            	mp4;
   video/mpeg                            mpeg mpg;
   video/quicktime                       mov;
+  audio/webm                            weba;
   video/webm                            webm;
   video/x-flv                           flv;
   video/x-msvideo                       avi;
