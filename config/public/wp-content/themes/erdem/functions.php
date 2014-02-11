@@ -146,7 +146,7 @@ function setmetaData($data, $post, $field_name) {
 		 $querystr = "
 		    SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.guid
 		    FROM $wpdb->posts
-		    WHERE $wpdb->posts.ID IN (" . explode(',', $media_ids) . ")
+		    WHERE $wpdb->posts.ID IN (" . implode(',', $media_ids) . ")
 		    AND $wpdb->posts.post_type = 'attachment'
 		    ORDER BY $wpdb->posts.ID
 		 ";
