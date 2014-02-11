@@ -132,7 +132,7 @@ add_filter( 'rest_api_allowed_post_types', 'allow_my_post_types');
  */
 function setmetaData($data, $post, $field_name) {
 	global $wpdb;
-	
+
 	$media_ids = get_post_meta($post->ID, $field_name, true);
 
 	if(is_array($media_ids)) {
@@ -146,7 +146,7 @@ function setmetaData($data, $post, $field_name) {
 		 $querystr = "
 		    SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.guid
 		    FROM $wpdb->posts
-		    WHERE $wpdb->posts.ID IN ($media_ids)
+		    WHERE $wpdb->posts.ID IN (" . explode(',', $media_ids) . ")
 		    AND $wpdb->posts.post_type = 'attachment'
 		    ORDER BY $wpdb->posts.ID
 		 ";
