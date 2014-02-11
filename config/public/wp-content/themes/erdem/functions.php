@@ -4,7 +4,7 @@
  */
 function register_post_format() 
 {
-    add_theme_support( 'post-formats', array( 'standard' ) );
+	add_theme_support( 'post-formats', array( 'standard' ) );
 }
 add_action( 'after_setup_theme', 'register_post_format' );
 
@@ -16,70 +16,70 @@ function create_post_type()
 	register_post_type( 'collection',
 		array(
 			'labels' => array(
-                                
+
 				'name' => __( 'All Collections' ),
 				'singular_name' => __( 'Collection' )
-			),
-		'public' => true,
-		'has_archive' => true,
-                'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
-                'rewrite' => array('slug' => 'collections')
-		)
-	);
+				),
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
+			'rewrite' => array('slug' => 'collections')
+			)
+		);
 	register_post_type( 'biography',
 		array(
 			'labels' => array(
-                                
+
 				'name' => __( 'Biography' ),
 				'singular_name' => __( 'Biography' )
-			),
-		'public' => true,
-		'has_archive' => true,
-                'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
-                'rewrite' => array('slug' => 'biography')
-		)
-	);
-    register_post_type( 'stockist',
+				),
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
+			'rewrite' => array('slug' => 'biography')
+			)
+		);
+	register_post_type( 'stockist',
 		array(
 			'labels' => array(
-                                
+
 				'name' => __( 'All Stockists' ),
 				'singular_name' => __( 'Stockist' )
-			), 	
-		'public' => true,
-		'has_archive' => true,
-                'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
-                'rewrite' => array('slug' => 'stockists')
-		)
-	);
-    register_post_type( 'explore',
+				), 	
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
+			'rewrite' => array('slug' => 'stockists')
+			)
+		);
+	register_post_type( 'explore',
 		array(
 			'labels' => array(
-                                
+
 				'name' => __( 'All Explore' ),
 				'singular_name' => __( 'Explore' )
-			),
-		'public' => true,
-		'has_archive' => true,
-                'supports' => array( 'title', 'editor', 'post-formats', 'thumbnail', 'custom-fields', 'excerpt'),
-                'taxonomies' => array( 'disciplines', 'clients'),
-                'rewrite' => array('slug' => 'Explore')
-		)
-	);
-    register_post_type( 'contact',
+				),
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array( 'title', 'editor', 'post-formats', 'thumbnail', 'custom-fields', 'excerpt'),
+			'taxonomies' => array( 'disciplines', 'clients'),
+			'rewrite' => array('slug' => 'Explore')
+			)
+		);
+	register_post_type( 'contact',
 		array(
 			'labels' => array(
-                                
+
 				'name' => __( 'All Contacts' ),
 				'singular_name' => __( 'Contact' )
-			),
+				),
 		// 'taxonomies' => array('category'), 
-		'public' => true,
-		'has_archive' => true,
-                'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
-                'rewrite' => array('slug' => 'contacts')
-		)
-	);
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
+			'rewrite' => array('slug' => 'contacts')
+			)
+		);
 }
 add_action( 'init', 'create_post_type' );
 
@@ -95,8 +95,8 @@ function tax_stockists() {
 			'label' => __( 'Catagories' ),
 			'rewrite' => array( 'slug' => 'stockists' ),
 			'hierarchical' => true
-		)
-	);
+			)
+		);
 }
 add_action( 'init', 'tax_stockists' );
 
@@ -109,8 +109,8 @@ function tax_contacts() {
 			'label' => __( 'Catagories' ),
 			'rewrite' => array( 'slug' => 'contacts' ),
 			'hierarchical' => true
-		)
-	);
+			)
+		);
 }
 add_action( 'init', 'tax_contacts' );
 
@@ -134,17 +134,23 @@ function setmetaData($data, $post, $field_name) {
 	$media_ids = get_post_meta($post->ID, $field_name, true);
 
 	if(is_array($media_ids)) {
-		foreach ($media_ids as $media_id) {
-			$item = wp_get_attachment_url($media_id);
-			$thumbnail = wp_get_attachment_thumb_url($media_id);
-			$alt = get_post_meta($media_id, '_wp_attachment_image_alt', true);
+		// foreach ($media_ids as $media_id) {
+		// 	$item = wp_get_attachment_url($media_id);
+		// 	$thumbnail = wp_get_attachment_thumb_url($media_id);
+		// 	$alt = get_post_meta($media_id, '_wp_attachment_image_alt', true);
 			
-			$media[] = (object) array('original_size'=>$item, 'alt_text'=>$alt, 'custom_size'=>$thumbnail);
-			// $media = [];
-			// $media[] = $mediaItem;
-
-
-		}
+		// 	$media[] = (object) array('original_size'=>$item, 'alt_text'=>$alt, 'custom_size'=>$thumbnail);
+		// }
+		 $querystr = "
+		    SELECT $wpdb->posts.id, $wpdb->posts.post_title, $wpdb->posts.guid,
+		    FROM $wpdb->posts
+		    WHERE $wpdb->posts.post_parent IN " . $media_ids . "
+		    AND $wpdb->posts.post_type = 'attachment'
+		    ORDER BY $wpdb->posts.ID
+		 ";
+error_log($querystr);
+ 		$media = $wpdb->get_results($querystr, OBJECT);
+ error_log(print_r($media, true));
 	} else {
 		$item = wp_get_attachment_url($media_ids);
 		$media[] = $item;
@@ -156,7 +162,7 @@ function setmetaData($data, $post, $field_name) {
 add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 	global $post;
 
-    if( $state === 'read' ) {
+	if( $state === 'read' ) {
 
     	// Collection fields
 
@@ -213,7 +219,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 
 	}
 
-    return $data;
+	return $data;
 }, 10, 3);
 
 // print_r(get_post_meta( $post->ID, 'collection_video_featured'), true);
@@ -230,15 +236,15 @@ function remove_admin_menu_items() {
 		while (prev($menu)){
 			$item = explode(' ',$menu[key($menu)][0]);
 			if(in_array($item[0] != NULL?$item[0]:"" , $remove_menu_items)){
-			unset($menu[key($menu)]);}
+				unset($menu[key($menu)]);}
+			}
 		}
 	}
-}
-add_action('admin_menu', 'remove_admin_menu_items');
+	add_action('admin_menu', 'remove_admin_menu_items');
 
-function remove_jetpack_admin_menu_item() {
-	if( class_exists( 'Jetpack' ) && !current_user_can( 'manage_options' ) ) {
-		remove_menu_page( 'jetpack' );
+	function remove_jetpack_admin_menu_item() {
+		if( class_exists( 'Jetpack' ) && !current_user_can( 'manage_options' ) ) {
+			remove_menu_page( 'jetpack' );
+		}
 	}
-}
-add_action( 'admin_init', 'remove_jetpack_admin_menu_item' );
+	add_action( 'admin_init', 'remove_jetpack_admin_menu_item' );
