@@ -144,7 +144,7 @@ function setmetaData($data, $post, $field_name) {
 		// 	$media[] = (object) array('original_size'=>$item, 'alt_text'=>$alt, 'custom_size'=>$thumbnail);
 		// }
 		$querystr = "
-		SELECT $wpdb->posts.ID, $wpdb->posts.post_title AS alt_text, $wpdb->posts.guid AS original_size
+		SELECT $wpdb->posts.ID, $wpdb->posts.post_title AS alt_text, $wpdb->posts.guid AS original_size, $wpdb->posts.guid AS custom_size
 		FROM $wpdb->posts
 		WHERE $wpdb->posts.ID IN (" . implode(',', $media_ids) . ")
 		AND $wpdb->posts.post_type = 'attachment'
