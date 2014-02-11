@@ -142,11 +142,11 @@ function setmetaData($data, $post, $field_name) {
 		// 	$media[] = (object) array('original_size'=>$item, 'alt_text'=>$alt, 'custom_size'=>$thumbnail);
 		// }
 		 $querystr = "
-		    SELECT {$wpdb->posts.id}, {$wpdb->posts.post_title}, {$wpdb->posts.guid},
-		    FROM {$wpdb->posts}
-		    WHERE {$wpdb->posts.post_parent} IN ({$media_ids})
-		    AND {$wpdb->posts.post_type} = 'attachment'
-		    ORDER BY {$wpdb->posts.ID}
+		    SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.guid
+		    FROM $wpdb->posts
+		    WHERE $wpdb->posts.ID IN ($media_ids)
+		    AND $wpdb->posts.post_type = 'attachment'
+		    ORDER BY $wpdb->posts.ID
 		 ";
 error_log($querystr);
  		$media = $wpdb->get_results($querystr, OBJECT);
