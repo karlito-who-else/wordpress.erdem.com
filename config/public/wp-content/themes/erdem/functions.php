@@ -140,19 +140,19 @@ function setmetaData($data, $post, $field_name) {
 		// 	$item = wp_get_attachment_url($media_id);
 		// 	$thumbnail = wp_get_attachment_thumb_url($media_id);
 		// 	$alt = get_post_meta($media_id, '_wp_attachment_image_alt', true);
-			
+
 		// 	$media[] = (object) array('original_size'=>$item, 'alt_text'=>$alt, 'custom_size'=>$thumbnail);
 		// }
-		 $querystr = "
-		    SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.guid
-		    FROM $wpdb->posts
-		    WHERE $wpdb->posts.ID IN (" . implode(',', $media_ids) . ")
-		    AND $wpdb->posts.post_type = 'attachment'
-		    ORDER BY $wpdb->posts.ID
-		 ";
-error_log($querystr);
- 		$media = $wpdb->get_results($querystr, OBJECT);
- error_log(print_r($media, true));
+		$querystr = "
+		SELECT $wpdb->posts.ID, $wpdb->posts.post_title AS alt_text, $wpdb->posts.guid AS original_size
+		FROM $wpdb->posts
+		WHERE $wpdb->posts.ID IN (" . implode(',', $media_ids) . ")
+		AND $wpdb->posts.post_type = 'attachment'
+		ORDER BY $wpdb->posts.ID
+		";
+		// error_log($querystr);
+		$media = $wpdb->get_results($querystr, OBJECT);
+ 		// error_log(print_r($media, true));
 	} else {
 		$item = wp_get_attachment_url($media_ids);
 		$media[] = $item;
