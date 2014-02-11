@@ -177,6 +177,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 		setmetaData($data, $post, 'collection_lookbook');
 		setmetaData($data, $post, 'collection_backstage');
 		$data->meta->collection_video = get_post_meta( $post->ID, 'collection_video');
+		$data->meta->collection_featured = get_post_meta( $post->ID, 'collection_featured', true);
 
 		// Stockists fields
 
