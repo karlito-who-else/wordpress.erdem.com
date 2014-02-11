@@ -131,6 +131,8 @@ add_filter( 'rest_api_allowed_post_types', 'allow_my_post_types');
  * Make custom post metadata available to Thermal API
  */
 function setmetaData($data, $post, $field_name) {
+	global $wpdb;
+	
 	$media_ids = get_post_meta($post->ID, $field_name, true);
 
 	if(is_array($media_ids)) {
