@@ -159,9 +159,9 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
     if( $state === 'read' ) {
 
     	// Collection fields
-    error_log( $data );
-    error_log( $post );
-    error_log( $state );
+    error_log( print_r( $data, true ) );
+    error_log( print_r( $post, true ) );
+    error_log( print_r( $state, true ) );
 
 		$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
 		$data->meta->collection_runway_active = get_post_meta( $post->ID, 'collection_runway_active');
