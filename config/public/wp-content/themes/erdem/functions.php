@@ -158,17 +158,9 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 
   if( $state === 'read' ) {
 
-    	// Collection fields
-    error_log( 'DATA LOG ' . print_r( $data, true ) . ' END DATA LOG' );
-    error_log( 'POST LOG ' . print_r( $post, true ) . ' END POST LOG' );
-    error_log( 'STATE LOG ' . print_r( $state, true ) . ' END STATE LOG' );
+    $get = $_GET["post_type"];
 
-
-    $get = $_GET['explore'];
-
-    error_log( $get );
-
-    if ( $get === 'explore' )
+    if ( $get === "collections" )
     {
 
 			$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
@@ -189,17 +181,22 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 			setmetaData($data, $post, 'collection_backstage');
 			$data->meta->collection_video = get_post_meta( $post->ID, 'collection_video');
 
-		} else {
+		} else if ( $get === "stockists" ) {
 
 			// Stockists fields
 
 			$data->meta->stockist_url = get_post_meta( $post->ID, 'stockist_url', true);
+
+		} else if ( $get === "biography" ) {
 
 			// Biography fields
 
 			$data->meta->biography_title = get_post_meta( $post->ID, 'biography_title');
 			$data->meta->biography_copy = get_post_meta( $post->ID, 'biography_copy');
 			setmetaData($data, $post, 'biography_featured_image');
+
+
+		} else if ( $get === "explore" ) {
 
 			// Explore fields
 			
@@ -211,6 +208,8 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 			setmetaData($data, $post, 'explore_image');
 			$data->meta->explore_share = get_post_meta( $post->ID, 'explore_share', true);
 
+
+		} else if ( $get === "contact" ) {
 			// Contact Fields
 			
 			$data->meta->contact_catagory = get_post_meta( $post->ID, 'contact_catagory', true);
