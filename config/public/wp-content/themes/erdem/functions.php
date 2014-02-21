@@ -160,7 +160,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 
     $get = $_GET["post_type"];
 
-    if ( $get === "collections" )
+    if ( $get === "collection" )
     {
 
 			$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
