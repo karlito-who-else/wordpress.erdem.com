@@ -163,6 +163,8 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
     error_log( print_r( $post, true ) );
     error_log( print_r( $state, true ) );
 
+    
+
 		$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
 		$data->meta->collection_runway_active = get_post_meta( $post->ID, 'collection_runway_active');
 		$data->meta->collection_lookbook_active = get_post_meta( $post->ID, 'collection_lookbook_active');
