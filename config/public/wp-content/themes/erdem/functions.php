@@ -164,12 +164,12 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
     error_log( 'STATE LOG ' . print_r( $state, true ) . ' END STATE LOG' );
 
 
-    var $get = $_GET['explore'];
+    $get = $_GET['explore'];
 
     error_log( $get );
 
-    /*if ( $get === 'explore' )
-    {*/
+    if ( $get === 'explore' )
+    {
 
 			$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
 			$data->meta->collection_runway_active = get_post_meta( $post->ID, 'collection_runway_active');
@@ -189,7 +189,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 			setmetaData($data, $post, 'collection_backstage');
 			$data->meta->collection_video = get_post_meta( $post->ID, 'collection_video');
 
-		/*} else {*/
+		} else {
 
 			// Stockists fields
 
@@ -223,7 +223,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 			$data->meta->contact_telephone = get_post_meta( $post->ID, 'contact_telephone', true);
 			$data->meta->contact_email = get_post_meta( $post->ID, 'contact_email', true);
 
-		/*}*/
+		}
 
 	}
 
