@@ -164,60 +164,74 @@ function setmetaData($data, $post, $field_name) {
 add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 	global $post;
 
-	if( $state === 'read' ) {
+  if( $state === 'read' ) {
 
-    	// Collection fields
+    $get = $_GET["post_type"];
 
-		$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
-		$data->meta->collection_runway_active = get_post_meta( $post->ID, 'collection_runway_active');
-		$data->meta->collection_lookbook_active = get_post_meta( $post->ID, 'collection_lookbook_active');
-		$data->meta->collection_backstage_active = get_post_meta( $post->ID, 'collection_backstage_active');
-		$data->meta->collection_video_active = get_post_meta( $post->ID, 'collection_video_active');
-		
-		setmetaData($data, $post, 'collection_featured_image');
-		setmetaData($data, $post, 'collection_runway_featured');
-		setmetaData($data, $post, 'collection_lookbook_featured');
-		setmetaData($data, $post, 'collection_backstage_featured');
-		setmetaData($data, $post, 'collection_video_featured');
-		setmetaData($data, $post, 'collection_video_poster');
-		
-		setmetaData($data, $post, 'collection_runway');
-		setmetaData($data, $post, 'collection_lookbook');
-		setmetaData($data, $post, 'collection_backstage');
-		$data->meta->collection_video = get_post_meta( $post->ID, 'collection_video');
-		$data->meta->collection_featured = get_post_meta( $post->ID, 'collection_featured', true);
+    if ( $get === "collection" )
+    {
 
-		// Stockists fields
+			$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
+			$data->meta->collection_featured = get_post_meta( $post->ID, 'collection_featured');
+			$data->meta->collection_runway_active = get_post_meta( $post->ID, 'collection_runway_active');
+			$data->meta->collection_lookbook_active = get_post_meta( $post->ID, 'collection_lookbook_active');
+			$data->meta->collection_backstage_active = get_post_meta( $post->ID, 'collection_backstage_active');
+			$data->meta->collection_video_active = get_post_meta( $post->ID, 'collection_video_active');
+			
+			setmetaData($data, $post, 'collection_featured_image');
+			setmetaData($data, $post, 'collection_runway_featured');
+			setmetaData($data, $post, 'collection_lookbook_featured');
+			setmetaData($data, $post, 'collection_backstage_featured');
+			setmetaData($data, $post, 'collection_video_featured');
+			setmetaData($data, $post, 'collection_video_poster');
+			
+			setmetaData($data, $post, 'collection_runway');
+			setmetaData($data, $post, 'collection_lookbook');
+			setmetaData($data, $post, 'collection_backstage');
+			$data->meta->collection_video = get_post_meta( $post->ID, 'collection_video');
 
-		$data->meta->stockist_url = get_post_meta( $post->ID, 'stockist_url', true);
+		} else if ( $get === "stockists" ) {
 
-		// Biography fields
+			// Stockists fields
 
-		$data->meta->biography_title = get_post_meta( $post->ID, 'biography_title');
-		$data->meta->biography_copy = get_post_meta( $post->ID, 'biography_copy');
-		setmetaData($data, $post, 'biography_featured_image');
+			$data->meta->stockist_url = get_post_meta( $post->ID, 'stockist_url', true);
 
-		// Explore fields
-		
-		$data->meta->explore_type = get_post_meta( $post->ID, 'explore_type');
-		$data->meta->explore_copy = get_post_meta( $post->ID, 'explore_copy');
-		$data->meta->explore_url = get_post_meta( $post->ID, 'explore_url');
-		$data->meta->explore_video = get_post_meta( $post->ID, 'explore_video');
-		$data->meta->waiting_list = get_post_meta( $post->ID, 'waiting_list');
-		setmetaData($data, $post, 'explore_image');
-		$data->meta->explore_share = get_post_meta( $post->ID, 'explore_share', true);
+		} else if ( $get === "biography" ) {
 
-		// Contact Fields
-		
-		$data->meta->contact_catagory = get_post_meta( $post->ID, 'contact_catagory', true);
-		$data->meta->contact_name = get_post_meta( $post->ID, 'contact_name', true);
-		$data->meta->contact_orginization = get_post_meta( $post->ID, 'contact_orginization', true);
-		$data->meta->contact_address_one = get_post_meta( $post->ID, 'contact_address_one', true);
-		$data->meta->contact_address_two = get_post_meta( $post->ID, 'contact_address_two', true);
-		$data->meta->contact_city = get_post_meta( $post->ID, 'contact_city', true);
-		$data->meta->contact_postcode = get_post_meta( $post->ID, 'contact_postcode', true);
-		$data->meta->contact_telephone = get_post_meta( $post->ID, 'contact_telephone', true);
-		$data->meta->contact_email = get_post_meta( $post->ID, 'contact_email', true);
+			// Biography fields
+
+			$data->meta->biography_title = get_post_meta( $post->ID, 'biography_title');
+			$data->meta->biography_copy = get_post_meta( $post->ID, 'biography_copy');
+			setmetaData($data, $post, 'biography_featured_image');
+
+
+		} else if ( $get === "explore" ) {
+
+			// Explore fields
+			
+			$data->meta->explore_type = get_post_meta( $post->ID, 'explore_type');
+			$data->meta->explore_copy = get_post_meta( $post->ID, 'explore_copy');
+			$data->meta->explore_url = get_post_meta( $post->ID, 'explore_url');
+			$data->meta->explore_video = get_post_meta( $post->ID, 'explore_video');
+			$data->meta->waiting_list = get_post_meta( $post->ID, 'waiting_list');
+			setmetaData($data, $post, 'explore_image');
+			$data->meta->explore_share = get_post_meta( $post->ID, 'explore_share', true);
+
+
+		} else if ( $get === "contact" ) {
+			// Contact Fields
+			
+			$data->meta->contact_catagory = get_post_meta( $post->ID, 'contact_catagory', true);
+			$data->meta->contact_name = get_post_meta( $post->ID, 'contact_name', true);
+			$data->meta->contact_orginization = get_post_meta( $post->ID, 'contact_orginization', true);
+			$data->meta->contact_address_one = get_post_meta( $post->ID, 'contact_address_one', true);
+			$data->meta->contact_address_two = get_post_meta( $post->ID, 'contact_address_two', true);
+			$data->meta->contact_city = get_post_meta( $post->ID, 'contact_city', true);
+			$data->meta->contact_postcode = get_post_meta( $post->ID, 'contact_postcode', true);
+			$data->meta->contact_telephone = get_post_meta( $post->ID, 'contact_telephone', true);
+			$data->meta->contact_email = get_post_meta( $post->ID, 'contact_email', true);
+
+		}
 
 	}
 
