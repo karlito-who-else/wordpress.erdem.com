@@ -20,66 +20,66 @@ function create_post_type()
 				'name' => __( 'All Collections' ),
 				'singular_name' => __( 'Collection' )
 				),
-			'public' => true,
-			'has_archive' => true,
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
-			'rewrite' => array('slug' => 'collections')
-			)
-		);
-	register_post_type( 'biography',
-		array(
-			'labels' => array(
+		'public' => true,
+		'has_archive' => true,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
+		'rewrite' => array('slug' => 'collections')
+		)
+	);
+register_post_type( 'biography',
+	array(
+		'labels' => array(
 
-				'name' => __( 'Biography' ),
-				'singular_name' => __( 'Biography' )
-				),
-			'public' => true,
-			'has_archive' => true,
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
-			'rewrite' => array('slug' => 'biography')
-			)
-		);
-	register_post_type( 'stockist',
-		array(
-			'labels' => array(
+			'name' => __( 'Biography' ),
+			'singular_name' => __( 'Biography' )
+			),
+	'public' => true,
+	'has_archive' => true,
+	'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
+	'rewrite' => array('slug' => 'biography')
+	)
+);
+register_post_type( 'stockist',
+	array(
+		'labels' => array(
 
-				'name' => __( 'All Stockists' ),
-				'singular_name' => __( 'Stockist' )
-				), 	
-			'public' => true,
-			'has_archive' => true,
-			'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
-			'rewrite' => array('slug' => 'stockists')
-			)
-		);
-	register_post_type( 'explore',
-		array(
-			'labels' => array(
+			'name' => __( 'All Stockists' ),
+			'singular_name' => __( 'Stockist' )
+			), 	
+	'public' => true,
+	'has_archive' => true,
+	'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
+	'rewrite' => array('slug' => 'stockists')
+	)
+);
+register_post_type( 'explore',
+	array(
+		'labels' => array(
 
-				'name' => __( 'All Explore' ),
-				'singular_name' => __( 'Explore' )
-				),
-			'public' => true,
-			'has_archive' => true,
-			'supports' => array( 'title', 'editor', 'post-formats', 'thumbnail', 'custom-fields', 'excerpt'),
-			'taxonomies' => array( 'disciplines', 'clients'),
-			'rewrite' => array('slug' => 'Explore')
-			)
-		);
-	register_post_type( 'contact',
-		array(
-			'labels' => array(
+			'name' => __( 'All Explore' ),
+			'singular_name' => __( 'Explore' )
+			),
+	'public' => true,
+	'has_archive' => true,
+	'supports' => array( 'title', 'editor', 'post-formats', 'thumbnail', 'custom-fields', 'excerpt'),
+	'taxonomies' => array( 'disciplines', 'clients'),
+	'rewrite' => array('slug' => 'Explore')
+	)
+);
+register_post_type( 'contact',
+	array(
+		'labels' => array(
 
-				'name' => __( 'All Contacts' ),
-				'singular_name' => __( 'Contact' )
-				),
+			'name' => __( 'All Contacts' ),
+			'singular_name' => __( 'Contact' )
+			),
 		// 'taxonomies' => array('category'), 
-			'public' => true,
-			'has_archive' => true,
-			'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
-			'rewrite' => array('slug' => 'contacts')
-			)
-		);
+	'public' => true,
+	'has_archive' => true,
+	'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt'),
+	'rewrite' => array('slug' => 'contacts')
+	)
+);
 }
 add_action( 'init', 'create_post_type' );
 
@@ -96,7 +96,7 @@ function tax_stockists() {
 			'rewrite' => array( 'slug' => 'stockists' ),
 			'hierarchical' => true
 			)
-		);
+	);
 }
 add_action( 'init', 'tax_stockists' );
 
@@ -110,7 +110,7 @@ function tax_contacts() {
 			'rewrite' => array( 'slug' => 'contacts' ),
 			'hierarchical' => true
 			)
-		);
+	);
 }
 add_action( 'init', 'tax_contacts' );
 
@@ -161,15 +161,15 @@ function setmetaData($data, $post, $field_name) {
 
 	$data->meta->${field_name} = $media;
 }
+
 add_filter( 'thermal_post_entity',  function($data, $post, $state) {
 	global $post;
 
-  if( $state === 'read' ) {
+	if( $state === 'read' ) {
 
-    $get = $_GET["post_type"];
+		$get = $_GET["post_type"];
 
-    if ( $get === "collection" )
-    {
+		if ( $get === "collection" ) {
 
 			$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
 			$data->meta->collection_featured = get_post_meta( $post->ID, 'collection_featured')[0];
@@ -249,18 +249,19 @@ function remove_admin_menu_items() {
 	end ($menu);
 
 	if( !current_user_can( 'manage_options' ) ) {
-		while (prev($menu)){
+		while (prev($menu)) {
 			$item = explode(' ',$menu[key($menu)][0]);
-			if(in_array($item[0] != NULL?$item[0]:"" , $remove_menu_items)){
-				unset($menu[key($menu)]);}
+			if(in_array($item[0] != NULL?$item[0]:"" , $remove_menu_items)) {
+				unset($menu[key($menu)]);
 			}
 		}
 	}
-	add_action('admin_menu', 'remove_admin_menu_items');
+}
+add_action('admin_menu', 'remove_admin_menu_items');
 
-	function remove_jetpack_admin_menu_item() {
-		if( class_exists( 'Jetpack' ) && !current_user_can( 'manage_options' ) ) {
-			remove_menu_page( 'jetpack' );
-		}
+function remove_jetpack_admin_menu_item() {
+	if( class_exists( 'Jetpack' ) && !current_user_can( 'manage_options' ) ) {
+		remove_menu_page( 'jetpack' );
 	}
-	add_action( 'admin_init', 'remove_jetpack_admin_menu_item' );
+}
+add_action( 'admin_init', 'remove_jetpack_admin_menu_item' );
