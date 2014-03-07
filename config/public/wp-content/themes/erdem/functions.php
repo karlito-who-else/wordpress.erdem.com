@@ -164,7 +164,7 @@ add_filter( 'thermal_post_entity',  function($data, $post, $state) {
     {
 
 			$data->meta->collection_copy = get_post_meta( $post->ID, 'collection_copy');
-			$data->meta->collection_featured = get_post_meta( $post->ID, 'collection_featured');
+			$data->meta->collection_featured = get_post_meta( $post->ID, 'collection_featured')[0];
 			$data->meta->collection_runway_active = get_post_meta( $post->ID, 'collection_runway_active');
 			$data->meta->collection_lookbook_active = get_post_meta( $post->ID, 'collection_lookbook_active');
 			$data->meta->collection_backstage_active = get_post_meta( $post->ID, 'collection_backstage_active');
